@@ -3,8 +3,10 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "floreca";
+$dbname = "florecanovo";
 $port = 3306;
+
+
 
 try{
     
