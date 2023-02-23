@@ -1,11 +1,18 @@
 <?php
-    require_once 'head.php';
-    include_once 'conexao.php';
+    require_once './head.php';
+    include_once './conexao.php';
 
-    $sql = "SELECT * from categoria";
+    $sql = "SELECT * from cliente";
     $resultado=$conn->prepare($sql);
     $resultado->execute();
 
+    $sql2 = "SELECT * from funcionario";
+    $resultado2=$conn->prepare($sql2);
+    $resultado2->execute();
+
+    $sql3 = "SELECT * from procedimento";
+    $resultado3=$conn->prepare($sql3);
+    $resultado3->execute();
 
 ?>
 
@@ -13,48 +20,48 @@
     <div class="container">
         <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3>Cadastro de procedimentos</h3>
+                    <h3>Cadastro de serviço</h3>
                 </div>
         </div>
 
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome">    
-                </div>
-            </div>           
+                    <label for="cliente">Cliente</label>
+                    <select name="cliente" class="form-control">
+                            
+                    <?php
 
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="descricao">Descrição</label>
-                    <input type="text" name="descricao" class="form-control">
+                        if (($resultado) and ($resultado->rowCount() !=0)) {
+                        while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                        extract($linha);
+                                
+                    ?>
+
+                        <option value="<?php echo $idcliente;?>"> <?php echo $nome; ?> </option>
+
+                    <?php
+                            }
+                        }
+                    ?>
+                    </select>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <!-- <div class="col-md-3">
-                <div class="form-group">
-                    <label for="valor">Preço</label>
-                    <input type="text" name="valor" class="form-control" onchange="this.value = this.value.replace( /,/g, '.')">
-                </div>
-            </div> -->
 
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="categoria">Categoria</label>
-                    <select name="categoria" class="form-control">
+                    <label for="funcionario">Funcionário</label>
+                    <select name="funcionario" class="form-control">
                          
                         <?php
 
-                            if (($resultado) and ($resultado->rowCount() !=0)) {
-                                while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                                  extract($linha);
+                            if (($resultado2) and ($resultado2->rowCount() !=0)) {
+                                while ($linha2 = $resultado2->fetch(PDO::FETCH_ASSOC)) {
+                                  extract($linha2);
                             
                         ?>
 
-                        <option value="<?php echo $idcategoria;?>"> <?php echo $nomecategoria; ?> </option>
+                        <option value="<?php echo $idfuncionario;?>"> <?php echo $nome; ?> </option>
 
                         <?php
                                 }
@@ -63,9 +70,65 @@
                     </select>
                 </div>
             </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="procedimento">Procedimento</label>
+                    <select name="procedimento" class="form-control">
+                                
+                    <?php
+
+                        if (($resultado3) and ($resultado3->rowCount() !=0)) {
+                        while ($linha3 = $resultado3->fetch(PDO::FETCH_ASSOC)) {
+                        extract($linha3);
+                                    
+                    ?>
+                        <option value="<?php echo $idprocedimento;?>"> <?php echo $nomeprocedimento; ?> </option>
+
+                    <?php
+                            }
+                        }
+                    ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="categoria">Local do corpo</label>
+                    <select name="categoria" class="form-control">                  
+                        <option value="facial">Facial </option>
+                        <option value="corporal">Corporal </option>
+                        <option value="ambos">Ambos </option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <div class="row">    
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="descrição">Descrição</label>
+                    <textarea class="form-control" name="descrição" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="date">Data</label>
+                    <input type="date" name="date" class="form-control"> 
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="valor">Valor Total</label>
+                    <input type="text" name="valor" class="form-control" onchange="this.value = this.value.replace( /,/g, '.')">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-12 text-center">
                 <input type="submit" class="btn btn-primary" name="btncad" value="Enviar">
             </div>
@@ -73,5 +136,5 @@
 </form>
 
 <?php
-    require_once 'footer-admin.php';
+    require_once './footer-admin.php';
 ?>

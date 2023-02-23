@@ -1,5 +1,5 @@
 <?php
-    include_once 'conexao.php';
+    include_once './conexao.php';
     
     if(isset($_SESSION['msg'])){
         echo $_SESSION['msg'];
@@ -27,13 +27,16 @@
 
     if (!$vazio) {
 
-            $sql = "INSERT INTO procedimento(nomeprocedimento,descricao,idcategoria)
-        VALUES(:nomeprocedimento,:descricao,:idcategoria)";
+            $sql = "INSERT INTO itemservico(iditem,idservico,idprocedimento,data,horario,valor)
+        VALUES(:iditem,:idservico,:idprocedimento,:data,:horario,:valor)";
 
     $salvar= $conn->prepare($sql);
-    $salvar->bindParam(':nomeprocedimento', $dadosserv['nomeprocedimento'], PDO::PARAM_STR);
-    $salvar->bindParam(':descricao', $dadosserv['descricao'], PDO::PARAM_STR);
-    $salvar->bindParam(':idcategoria', $dadosserv['categoria'], PDO::PARAM_STR);   
+    $salvar->bindParam(':iditem', $dadosserv['iditem'], PDO::PARAM_STR);
+    $salvar->bindParam(':idservico', $dadosserv['idservico'], PDO::PARAM_STR);
+    $salvar->bindParam(':idprocedimento', $dadosserv['idprocedimento'], PDO::PARAM_STR);
+    $salvar->bindParam(':data', $dadosserv['data'], PDO::PARAM_STR);  
+    $salvar->bindParam(':horario', $dadosserv['horario'], PDO::PARAM_STR); 
+    $salvar->bindParam(':valor', $dadosserv['valor'], PDO::PARAM_STR);
     $salvar->execute();
 
     if ($salvar->rowCount()) {
@@ -56,9 +59,7 @@
 
   }
 
-
 if (!empty($dadosserv['btneditar'])) {
-
 
     var_dump($dadosserv);
 
@@ -66,17 +67,15 @@ if (!empty($dadosserv['btneditar'])) {
 
     $sql = "UPDATE procedimento set nome=:nome,descricao=:descricao,valor=:valor,
     idcategoria=:idcategoria,
-   WHERE codigoproduto =:codigoproduto";
+--    WHERE codigoproduto =:codigoproduto";
 
     $salvar= $conn->prepare($sql);
     $salvar->bindParam(':nomeprocedimento', $dadosserv['nomeprocedimento'], PDO::PARAM_STR);
     $salvar->bindParam(':descricao', $dadosserv['descricao'], PDO::PARAM_STR);
     $salvar->bindParam(':valor', $dadosserv['valor'], PDO::PARAM_STR);
     $salvar->bindParam(':idcategoria', $dadosserv['categoria'], PDO::PARAM_STR);   
-    $salvar->bindParam(':codigoproduto', $dadosprod['codigo'], PDO::PARAM_INT);
-
-
-$salvar->execute();
+    // $salvar->bindParam(':codigoproduto', $dadosprod['codigo'], PDO::PARAM_INT);
+    $salvar->execute();
 
     if ($salvar->rowCount()) {
         
