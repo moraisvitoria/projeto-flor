@@ -1,5 +1,5 @@
 <?php
-    require_once 'head.php';
+    require_once './head.php';
 
     session_start();
     ob_start();
@@ -43,8 +43,8 @@
           </ul>
           <form class="form-inline my-2 my-lg-0">
 
-            <!-- <a href="frmcarrinho.php">
-            <img src="imagens/carrinho.png" style=width:50px;height:50px;></a> -->
+            <a href="./frm-agenda.php">
+            <img src="./imagens/pagamento-seguro.png" style=width:40px;height:40px;></a>
             <?php 
               if($_SESSION["quant"]>0){
                  echo $_SESSION["quant"]; 
@@ -59,50 +59,4 @@
     require_once './footer-admin.php';
 ?>
 
-    <!-- Modal -->
-
-    
-<!-- <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center text-info" id="exampleModalLabel">Acesso ao Sistema</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div id="login">
-       
-        <div class="container-fluid">
-            <div id="login-row" class="row justify-content-center">
-               
-                   
-                        <form id="login-form" class="form" action="" method="post">
-                            
-                            <div class="form-group">
-                                <label for="username" class="text-info">Nome de Usuário:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="text-info">Senha:</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                               
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Enviar">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Cadastre-se">
-                            </div>
-                            
-                        </form>
-                   
-               
-            </div>
-        </div>
-    </div>
-            
-      </div>
-     
-    </div>
-  </div>
-</div> -->
+   
